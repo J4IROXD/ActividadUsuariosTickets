@@ -1,6 +1,7 @@
 package utez.edu.mx.ActividadUsuariosTickets.service;
 
 import org.springframework.stereotype.Service;
+import utez.edu.mx.ActividadUsuariosTickets.dto.RequestCrearUsuarioDTO;
 import utez.edu.mx.ActividadUsuariosTickets.dto.TicketCreateDTO;
 import utez.edu.mx.ActividadUsuariosTickets.exception.customExceptions.BadRequestException;
 import utez.edu.mx.ActividadUsuariosTickets.model.EstadoTicket;
@@ -80,5 +81,12 @@ public class TicketService {
             throw new BadRequestException("El usuario no existe");
         }
         return ticketRepository.findByUsuarioId(usuarioId);
+    }
+
+    public Usuario crearUsuario(RequestCrearUsuarioDTO dto) {
+        Usuario usuario = new Usuario();
+        usuario.setNombre(dto.getNombre());
+        usuario.setActivo(true);
+        return usuarioRepository.save(usuario);
     }
 }
